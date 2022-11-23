@@ -1,0 +1,23 @@
+{
+  "name": "cypress-real-events-example",
+  "version": "1.0.0",
+  "description": "Playing with cypress-real-events plugin",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open --e2e --browser chrome",
+    "cy:run": "cypress run --e2e --browser chrome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^11.2.0",
+    "cypress-real-events": "^1.7.4",
+    "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "clipboardy": "^2.3.0",
+    "cypress-cdp": "^1.2.0"
+  }
+}
