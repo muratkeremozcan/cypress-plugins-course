@@ -1,0 +1,12 @@
+<aside class="settings">
+  <button
+    (click)="toggleSettings()"
+    class="toggle-settings"
+  >
+    ⚙️
+  </button>
+</aside>
+<dialog [open]="showSettings" class="settings">
+  <h1>Settings</h1>
+  <p>All the settings go here</p>
+</dialog>

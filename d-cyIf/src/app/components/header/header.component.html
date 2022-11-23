@@ -1,0 +1,10 @@
+<header class="header">
+  <h1 data-cy="app-title">todos</h1>
+  <input
+    class="new-todo"
+    placeholder="What needs to be done?"
+    [value]="title"
+    (input)="handleChange($event)"
+    (keyup)="handleSubmit($event)"
+  />
+</header>

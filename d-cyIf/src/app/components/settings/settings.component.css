@@ -1,0 +1,22 @@
+aside.settings {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #f1fcec;
+  border: 2px lightgray solid;
+  border-radius: 4px;
+  padding: 0px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+}
+
+dialog.settings {
+  position: absolute;
+  top: 5px;
+  width: 300px;
+  height: 400px;
+  z-index: 10;
+  padding: 1rem;
+}

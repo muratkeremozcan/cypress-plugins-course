@@ -1,0 +1,31 @@
+aside.survey {
+  position: absolute;
+  top: 20px;
+  margin: auto 0;
+  left: 50%;
+  background-color: #f1fcec;
+  border: 2px lightgray solid;
+  border-radius: 5px;
+  width: 40%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  padding: 10px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.header button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid gray;
+  font-size: 1.5em;
+  background-color: white;
+}
+.header button:hover {
+  font-weight: bold;
+}

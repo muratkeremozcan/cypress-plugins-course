@@ -1,0 +1,21 @@
+<footer class="footer">
+  <span class="todo-count"
+    ><strong data-cy="remaining-count">{{ itemsLeft$ | async }}</strong
+    ><span> {{ itemText$ | async }} left</span></span
+  >
+  <ul class="filters">
+    <li *ngFor="let item of filterTitles">
+      <a
+        href="#"
+        [class.selected]="item.key === (filter$ | async)"
+        (click)="handleFilterSelect(item.key)"
+        [attr.data-cy]="'filter-' + item.value.toLowerCase()"
+      >
+        {{ item.value }}
+      </a>
+    </li>
+  </ul>
+  <button *ngIf="!!(completedCount$ | async)" class="clear-completed" (click)="handleClearCompleted()">
+    Clear completed
+  </button>
+</footer>
