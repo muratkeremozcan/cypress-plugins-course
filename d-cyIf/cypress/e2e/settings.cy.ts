@@ -1,3 +1,7 @@
+before(() => {
+  cy.visitAndReset();
+});
+
 const ensureSettingsClosed = () => {
   cy.get('dialog.settings', { timeout: 5000 })
     .if('visible')
@@ -6,10 +10,6 @@ const ensureSettingsClosed = () => {
 
   return cy.get('dialog.settings').should('not.be.visible');
 };
-
-before(() => {
-  cy.visitAndReset();
-});
 
 it('opens the settings dialog', () => {
   ensureSettingsClosed();
