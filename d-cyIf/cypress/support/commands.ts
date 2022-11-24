@@ -1,4 +1,4 @@
-it('loads the page', () => {
+Cypress.Commands.add('visitAndReset', () => {
   cy.visit('/');
   cy.get('#app').should('have.class', 'loaded');
 
@@ -10,7 +10,13 @@ it('loads the page', () => {
     .log('Survey stays hidden')
     .finally()
     .should('not.exist');
-  // cy.get('.survey').should('not.exist');
 
-  cy.get('.new-todo').type('Write code{enter}');
+  return cy
+    .get('.destroy', { timeout: 400 })
+    .if('exist')
+    .click({ force: true, multiple: true })
+    .else()
+    .log('no items to delete')
+    .finally()
+    .should('not.exist');
 });
