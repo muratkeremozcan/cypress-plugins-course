@@ -54,7 +54,7 @@ describe('Todo App', () => {
       .type('Learn JavaScript{enter}')
 
     // UNCOMMENT THIS
-    // cy.wrap({ a: 42 }).should(spok({ a: 42 }))
+    cy.wrap({ a: 42 }).should(spok({ a: 42 }))
 
     getState()
       // .then((data) => {
