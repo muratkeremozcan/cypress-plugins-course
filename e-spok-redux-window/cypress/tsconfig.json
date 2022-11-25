@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
+    "types": ["cypress", "node"]
+  },
+  "include": ["**/*.ts*"],
+  "extends": "../tsconfig.json"
+}
