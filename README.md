@@ -1,3 +1,3 @@
 # cypress-plugins-course
 
-From Gleb's https://cypress.tips/courses/cypress-plugins.
+Exercises from Gleb's course https://cypress.tips/courses/cypress-plugins.
