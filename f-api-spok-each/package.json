@@ -1,0 +1,34 @@
+{
+  "name": "test-api-example",
+  "version": "1.0.0",
+  "description": "Practice exercises for testing API calls using Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "start": "npm start --prefix todomvc",
+    "cypress": "cypress open",
+    "dev": "start-test 3000 cypress",
+    "print-tests": "find-cypress-specs --names --tags",
+    "lint": "tsc --noEmit --pretty",
+    "ci": "start-test 3000 cy:run",
+    "cy:run": "cypress run",
+    "postinstall": "npm install --prefix todomvc"
+  },
+  "keywords": [
+    "cypress-example"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com> (https://glebbahmutov.com/)",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@bahmutov/cy-api": "^2.2.1",
+    "cy-spok": "^1.5.2",
+    "cypress": "11.2.0",
+    "cypress-each": "^1.13.1",
+    "cypress-plugin-api": "^2.6.0",
+    "find-cypress-specs": "1.19.3",
+    "prettier": "2.7.1",
+    "start-server-and-test": "1.14.0",
+    "typescript": "4.8.3"
+  }
+}
