@@ -6,13 +6,17 @@
   "private": true,
   "scripts": {
     "test": "cypress run",
-    "badges": "npx -p dependency-version-badge update-badge cypress"
+    "badges": "npx -p dependency-version-badge update-badge cypress",
+    "cy:open": "cypress open --e2e --browser chrome"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "11.0.1",
+    "cypress": "11.2.0",
     "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "cypress-if": "^1.10.2"
   }
 }
