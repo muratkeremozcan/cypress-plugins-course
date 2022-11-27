@@ -1,0 +1,18 @@
+{
+  "name": "cypress-cookie-banner-example",
+  "version": "1.0.0",
+  "description": "Control the cookie consent banner from Cypress tests",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "cypress run",
+    "badges": "npx -p dependency-version-badge update-badge cypress"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "11.0.1",
+    "prettier": "^2.7.1"
+  }
+}
