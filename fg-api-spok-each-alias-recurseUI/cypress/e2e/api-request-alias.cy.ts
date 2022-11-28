@@ -95,12 +95,10 @@ describe('try with before + keep value', () => {
       completed: false,
     })
       .its('body.id')
-      .as('id', { keep: true })
+      .as('id', { keep: true }) // KEY: keep the value
   })
 
   it('created the correct todo', () => {
-    // request the Todo item
-    // confirm the response body includes the correct title
     cy.request('GET', '/todos/@id')
       .its('body')
       .as('todo')
@@ -112,11 +110,48 @@ describe('try with before + keep value', () => {
   })
 
   it('completes the created todo', () => {
-    // update the created todo item, set the "completed: true"
-    // using the "PATCH /todos/:id" request
     cy.request('PATCH', '/todos/@id', { completed: true })
 
     cy.request('GET', '/todos/@id')
+      .its('body')
+      .as('todo')
+      .should('deep.eq', {
+        title: 'test todo',
+        id: 1,
+        completed: true,
+      })
+  })
+})
+
+describe('try with traditional variable assignment', () => {
+  let id: string
+  before(() => {
+    cy.request('POST', '/reset', { todos: [] })
+    cy.request('POST', '/todos', {
+      title: 'test todo',
+      completed: false,
+    })
+      .its('body.id')
+      .then((bodyId) => {
+        id = bodyId
+      })
+  })
+
+  it('created the correct todo', () => {
+    cy.request('GET', '/todos/@id')
+      .its('body')
+      .as('todo')
+      .should('deep.eq', {
+        title: 'test todo',
+        id: 1,
+        completed: false,
+      })
+  })
+
+  it('completes the created todo', () => {
+    cy.request('PATCH', `/todos/${id}`, { completed: true })
+
+    cy.request('GET', `/todos/${id}`)
       .its('body')
       .as('todo')
       .should('deep.eq', {
