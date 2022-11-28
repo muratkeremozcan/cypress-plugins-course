@@ -174,5 +174,5 @@ describe('classic vs ramda vs should-really', () => {
         ['apple', 'ball'],
       ),
     )
-  }) /*  */
+  })
 })
