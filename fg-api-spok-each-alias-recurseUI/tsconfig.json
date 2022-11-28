@@ -4,6 +4,7 @@
       "cypress",
       "cypress-recurse",
       "cy-spok",
+      "cypress-if",
       "@types/ramda"
     ],
     "lib": ["DOM", "ES2015"],

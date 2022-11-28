@@ -3,6 +3,9 @@ import { recurse } from 'cypress-recurse'
 import { map, tap, really } from 'cypress-should-really'
 import * as R from 'ramda'
 const { $ } = Cypress
+// @ts-ignore
+import chaiSorted from 'chai-sorted'
+chai.use(chaiSorted)
 
 const todos = [
   {
@@ -173,6 +176,13 @@ describe('classic vs ramda vs should-really', () => {
         'deep.equal',
         ['apple', 'ball'],
       ),
+    )
+  })
+
+  //www.chaijs.com/plugins/chai-sorted/
+  https: it('sorts items, using cypress-should-really and chai-sorted', () => {
+    cy.get('li.todo label').should(
+      really(map('innerText'), 'be.ascending'),
     )
   })
 })
