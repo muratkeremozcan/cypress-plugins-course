@@ -1,4 +1,8 @@
 import { recurse } from 'cypress-recurse'
+// @ts-expect-error no types yet
+import { map, tap, really } from 'cypress-should-really'
+import * as R from 'ramda'
+const { $ } = Cypress
 
 const todos = [
   {
@@ -53,9 +57,11 @@ it('items are sorted after the network call', () => {
     .should('deep.equal', ['apple', 'ball'])
 })
 
-it('sorts the items slowly', () => {
+it('sorts the items, using cypress-recurse with UI', () => {
   cy.request('POST', '/reset', { todos })
   cy.visit('/')
+  // confirm the application shows the loaded todo items
+  cy.get('li.todo').should('have.length', todos.length)
 
   // sort the items slowly
   cy.get('[data-cy=sort-slowly]').click()
@@ -63,16 +69,110 @@ it('sorts the items slowly', () => {
   // and confirm the labels are sorted alphabetically
   // Hint: use the utility "getTexts" function
   // before "deep.equal" assertion
+
   recurse(
     // the commands function
     () => cy.get('li.todo label').then(getTexts),
-    // the predicate function
+    // predicate
     (list) => expect(list).to.deep.equal(['apple', 'ball']),
-    // cypress-recurse options
+    // options
     {
       log: 'Sorted!',
       timeout: 10_000,
       delay: 500,
     },
   )
+})
+
+it('sorts items, using cypress-recurse with API', () => {
+  // reset the backend data by making an API call
+  // https://on.cypress.io/request
+  cy.request('POST', '/reset', { todos })
+  // visit the application
+  // https://on.cypress.io/visit
+  cy.visit('/')
+  // confirm the application shows the loaded todo items
+  cy.get('li.todo').should('have.length', todos.length)
+
+  cy.get('[data-cy=sort-slowly]').click()
+  // make the call to the /todos endpoint
+  // and check if the returned items are sorted alphabetically using the recurse helper.
+  // Sleep for 500ms between the attempts, and use 10 seconds time limit
+
+  recurse(
+    () => cy.request('/todos').its('body'),
+    (list) =>
+      expect(list).to.deep.equal([todos[1], todos[0]]),
+    {
+      log: 'Sorted!',
+      timeout: 10_000,
+      delay: 500,
+    },
+  )
+
+  // once the API returns the sorted todo items,
+  // confirm the list of todos shown on the page matches the same order
+  cy.get('li.todo label')
+    .then(getTexts)
+    .should('deep.equal', ['apple', 'ball'])
+})
+
+type Todo = {
+  id: string
+  title: string
+}
+
+describe('classic vs ramda vs should-really', () => {
+  beforeEach(() => {
+    // reset the backend data by making an API call
+    // https://on.cypress.io/request
+    cy.request('POST', '/reset', { todos })
+    // visit the application
+    // https://on.cypress.io/visit
+    cy.visit('/')
+    // confirm the application shows the loaded todo items
+    cy.get('li.todo').should('have.length', todos.length)
+    cy.get('[data-cy="sort-slowly"]').click()
+  })
+
+  // write a single cy.get + .should($li) command plus assertion callback function to verify the Todo titles are sorted
+  // look at the data transformation inside the single should(callback) you have written.
+  // Replace the individual steps with helpers from the cypress-should-really collection.
+  it('should check item sort the classic way', () => {
+    cy.get('li.todo label').should(($li) => {
+      const titles = getTexts($li)
+      expect(titles, 'titles').to.deep.equal([
+        'apple',
+        'ball',
+      ])
+    })
+  })
+
+  it('sorts items, using ramda', () => {
+    const fn = R.pipe(
+      $.makeArray as any, // Element[]
+      R.pluck('innerText'), // string[]
+      // R.tap(console.log),
+    )
+
+    cy.get('li.todo label').should(($li) => {
+      expect(fn($li)).to.deep.equal(['apple', 'ball'])
+    })
+  })
+
+  // Piping the data through a series of functions to be fed to the assertion expect(...).to Chai chainer is so common,
+  // that cypress-should-really has a ... helper for this.
+  // If you want to transform the data and run it through a Chai assertion use really function.
+  // It construct a should(callback) for you:
+
+  it('sorts items, using cypress-should-really', () => {
+    cy.get('li.todo label').should(
+      really(
+        map('innerText'),
+        // tap(console.log),
+        'deep.equal',
+        ['apple', 'ball'],
+      ),
+    )
+  }) /*  */
 })

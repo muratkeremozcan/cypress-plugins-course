@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "types": ["cypress"],
+    "types": [
+      "cypress",
+      "cypress-recurse",
+      "cy-spok",
+      "@types/ramda"
+    ],
     "lib": ["DOM", "ES2015"],
     "module": "es6",
     "target": "es6",

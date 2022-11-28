@@ -22,6 +22,7 @@
   "private": true,
   "devDependencies": {
     "@bahmutov/cy-api": "^2.2.1",
+    "@types/ramda": "^0.28.20",
     "cy-spok": "^1.5.2",
     "cypress": "11.2.0",
     "cypress-aliases": "1.4.1",
@@ -30,9 +31,9 @@
     "find-cypress-specs": "1.19.3",
     "prettier": "2.7.1",
     "start-server-and-test": "1.14.0",
-    "typescript": "4.8.3"
-  },
-  "dependencies": {
-    "cypress-recurse": "^1.24.0"
+    "typescript": "4.8.3",
+    "cypress-recurse": "^1.24.0",
+    "cypress-should-really": "^1.6.0",
+    "ramda": "^0.28.0"
   }
 }
