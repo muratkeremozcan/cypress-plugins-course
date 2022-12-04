@@ -1,4 +1,4 @@
-import 'cypress-aliases/commands'
+import 'cypress-aliases'
 import 'cypress-data-session'
 
 beforeEach(() => {
@@ -36,6 +36,7 @@ beforeEach(() => {
     },
   })
 })
+
 it('created the correct todo', () => {
   cy.request('GET', '/todos/@id')
     .its('body')

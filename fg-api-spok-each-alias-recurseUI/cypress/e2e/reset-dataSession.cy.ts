@@ -11,7 +11,7 @@ describe('data-session', () => {
     //    cy.request('POST', '/reset', { todos: [] })
     // -> the validate command should get all
     //    todos and return true if there are none
-    // Tip: use the options syntax for simplicity
+    // Tip: use the options syntax for simplicity–
     // cy.dataSession({ name: ..., ... })
     cy.dataSession({
       name: 'reset all todos',
@@ -21,9 +21,9 @@ describe('data-session', () => {
       },
       validate() {
         cy.log('in validate')
-        return cy
-          .request('GET', '/todos')
-          .then((r) => r.body.length === 0)
+        return cy.request('GET', '/todos').then((r) => {
+          return r.body.length === 0
+        })
       },
       recreate() {
         cy.log('in recreate')
