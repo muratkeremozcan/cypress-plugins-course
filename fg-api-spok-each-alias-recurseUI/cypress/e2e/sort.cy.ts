@@ -180,7 +180,7 @@ describe('classic vs ramda vs should-really', () => {
   })
 
   //www.chaijs.com/plugins/chai-sorted/
-  https: it('sorts items, using cypress-should-really and chai-sorted', () => {
+  it('sorts items, using cypress-should-really and chai-sorted', () => {
     cy.get('li.todo label').should(
       really(map('innerText'), 'be.ascending'),
     )

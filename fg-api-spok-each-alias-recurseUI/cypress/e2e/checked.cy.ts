@@ -75,10 +75,7 @@ describe('classic vs ramda, vs should-really', () => {
   // const completedJson = todos.map((todo) =>
   //   Boolean(todo.completed),
   // )
-  // const completedJson = R.pipe(
-  //   R.pluck('completed'),
-  //   R.map(Boolean),
-  // )(todos)
+
   const completedJson = pipe(
     map('completed'),
     map(Boolean),
