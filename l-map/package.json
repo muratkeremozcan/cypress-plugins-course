@@ -1,0 +1,31 @@
+{
+  "name": "cypress-map-example",
+  "version": "1.0.0",
+  "description": "Examples of cypress-map plugin",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahmutov/cypress-map-example.git"
+  },
+  "keywords": [
+    "cypress-example"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahmutov/cypress-map-example/issues"
+  },
+  "homepage": "https://github.com/bahmutov/cypress-map-example#readme",
+  "devDependencies": {
+    "@types/ramda": "^0.28.20",
+    "cypress": "^12.0.1",
+    "cypress-map": "^1.1.1",
+    "prettier": "^2.8.1",
+    "ramda": "^0.28.0"
+  }
+}
