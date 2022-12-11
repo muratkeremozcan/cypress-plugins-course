@@ -127,8 +127,8 @@ describe('cypress-map', () => {
             .map(Number)
 
             .reduce(sum)
-            .tap(console.log)
             .tap() // you can also use this without console ninja
+            // .tap(console.log) // same
             .should('equal', total)
         })
     })
