@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <div id="person">First person</div>
+    <script>
+      setTimeout(() => {
+        const json = {
+          name: 'Joe',
+          age: 10,
+        }
+        const el = document.getElementById('person')
+        el.setAttribute('data-field', JSON.stringify(json))
+      }, 1000)
+    </script>
+  </body>
+</html>

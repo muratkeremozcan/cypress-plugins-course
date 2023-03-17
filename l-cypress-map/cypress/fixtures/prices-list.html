@@ -1,6 +1,11 @@
 <body>
+  <style>
+    [data-selected] {
+      font-weight: 600;
+    }
+  </style>
   <ol id="prices">
-    <li data-price="99">Oranges $0.99</li>
+    <li data-price="99" data-selected>Oranges $0.99</li>
   </ol>
   <div id="total">--</div>
   <script>
@@ -9,7 +14,7 @@
       el.innerHTML += '<li data-price="101">Mango $1.01</li>'
     }, 500)
     setTimeout(() => {
-      el.innerHTML += '<li data-price="20">Potatoes $0.20</li>'
+      el.innerHTML += '<li data-price="20" data-selected>Potatoes $0.20</li>'
     }, 1500)
     setTimeout(() => {
       const t = document.getElementById('total')

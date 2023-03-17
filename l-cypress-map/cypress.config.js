@@ -4,7 +4,6 @@ module.exports = defineConfig({
   e2e: {
     // baseUrl, etc
     supportFile: false,
-    fixturesFolder: false,
     viewportHeight: 200,
     viewportWidth: 200,
     setupNodeEvents(on, config) {

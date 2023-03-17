@@ -2,34 +2,10 @@
 
 import 'cypress-map'
 import { pipe, pluck } from 'ramda'
-const { $ } = Cypress
+const { _, $ } = Cypress
 
 describe('cypress-map', () => {
-  beforeEach(() => cy.visit('cypress/prices-list.html'))
-
-  context('retry chain perks with cy12', () => {
-    it('has the last item', () => {
-      // confirm the last item in the list has HTML
-      // attribute "data-price=20"
-      cy.get('#prices li').last().should('have.attr', 'data-price', '20')
-    })
-    // before cy 12 you would have to ensure everything has loaded
-    it('has the last item: bonus 1', () => {
-      // confirm the last item in the list has HTML
-      // attribute "data-price=20"
-      cy.get('#prices li') // query
-        .should('have.length', 3) // assertion
-        .last() // query
-        .should('have.attr', 'data-price', '20') // assertion
-    })
-    // you could also do it with jquery, because you had to have 1 command
-    it('has the last item: bonus 2', () => {
-      // confirm the last item in the list has HTML
-      // attribute "data-price=20"
-      cy.get('#prices li:last') // query
-        .should('have.attr', 'data-price', '20') // assertion
-    })
-  })
+  beforeEach(() => cy.visit('cypress/fixtures/prices-list.html'))
 
   context('map', () => {
     // get the list of prices LI elements from each item extract the inner text
@@ -37,12 +13,56 @@ describe('cypress-map', () => {
     // Tip: you are mapping the list of DOM elements into a list of strings; each item => item.innerText
     it('shows the expected items - cypress-map', () => {
       cy.get('#prices li')
+        // .then(($li) => {
+        //   console.log($li)
+        //   /* jQuery.fin.init ...
+        //   {
+        //     "0": {},
+        //     "length": 1,
+        //     "prevObject": {
+        //         "0": {
+        //             "location": {
+        //                 "ancestorOrigins": {
+        //                     "0": "http://localhost:50706"
+        //                 },
+        //                 "href": "http://localhost:50706/cypress/prices-list.html",
+        //                 "origin": "http://localhost:50706",
+        //                 "protocol": "http:",
+        //                 "host": "localhost:50706",
+        //                 "hostname": "localhost",
+        //                 "port": "50706",
+        //                 "pathname": "/cypress/prices-list.html",
+        //                 "search": "",
+        //                 "hash": ""
+        //             },
+        //             "referrer": ""
+        //         },
+        //         "length": 1
+        //     },
+        //     "selector": "#prices li"
+        //   }
+        // */
+        //   console.log($li[0]) // <li data-price="99">Oranges $0.99</li>
+        //   console.log($li[0].innerText) // Oranges $0.99
+        //   console.log($li[0].textContent) // Oranges $0.99
+        //   console.log($li.text()) // Oranges $0.99
+        //   console.log(Cypress._.map($li, 'innerText')) // ['Oranges $0.99']
+        //   console.log(Cypress._.map($li, 'textContent')) // ['Oranges $0.99']
+        // })
+        // similar to _.map, we can just use the cypress-map shorthand
+        // see https://github.com/muratkeremozcan/cypress-conduit-tags/blob/main/cypress/e2e/likes.cy.js#L33
         .map('innerText')
         .should('deep.eq', ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20'])
     })
 
-    const pipedInnerText = pipe($.makeArray, pluck('innerText'))
+    it('shows the expected items - lodash', () => {
+      cy.get('#prices li')
+        .should('have.length', 3) // must have it with ramda
+        .then(($els) => _.map($els, 'innerText')) // because then is not a query command (doesn't retry)
+        .should('deep.eq', ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20'])
+    })
 
+    const pipedInnerText = pipe($.makeArray, pluck('innerText'))
     it('shows the expected items - ramda', () => {
       cy.get('#prices li')
         .should('have.length', 3) // must have it with ramda
@@ -76,7 +96,8 @@ describe('cypress-map', () => {
       // the confirm the list is equal to [99, 101, 20]
       cy.get('#prices li')
         .should('have.length', 3)
-        .mapInvoke('getAttribute', 'data-price')
+        .mapInvoke('getAttribute', 'data-price') // calls 'getAttribute' on every item on the list
+        .tap()
         .should('deep.eq', ['99', '101', '20'])
         .map(Number)
         .should('deep.eq', [99, 101, 20])
@@ -92,6 +113,7 @@ describe('cypress-map', () => {
         .should('have.length', 3)
         .mapInvoke('getAttribute', 'data-price')
         .map(Number)
+        .tap()
         .reduce(sum)
         .should('equal', 220)
     })
@@ -111,7 +133,7 @@ describe('cypress-map', () => {
         })
     })
 
-    it.only('using tap', () => {
+    it('using tap', () => {
       cy.get('#total')
         .should('have.attr', 'data-total')
         .then(Number)
@@ -125,7 +147,6 @@ describe('cypress-map', () => {
             //   console.log('tapped: ', i)
             // })
             .map(Number)
-
             .reduce(sum)
             .tap() // you can also use this without console ninja
             // .tap(console.log) // same
