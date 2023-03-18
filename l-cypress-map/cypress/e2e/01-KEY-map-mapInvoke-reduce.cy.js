@@ -44,10 +44,9 @@ describe('cypress-map', () => {
         // */
         //   console.log($li[0]) // <li data-price="99">Oranges $0.99</li>
         //   console.log($li[0].innerText) // Oranges $0.99
-        //   console.log($li[0].textContent) // Oranges $0.99
         //   console.log($li.text()) // Oranges $0.99
-        //   console.log(Cypress._.map($li, 'innerText')) // ['Oranges $0.99']
-        //   console.log(Cypress._.map($li, 'textContent')) // ['Oranges $0.99']
+        //   console.log($li.map(($li) => $li.innerText)) // ['Oranges $0.99']
+        //   console.log(_.map($li, 'innerText')) // ['Oranges $0.99']
         // })
         // similar to _.map, we can just use the cypress-map shorthand
         // see https://github.com/muratkeremozcan/cypress-conduit-tags/blob/main/cypress/e2e/likes.cy.js#L33
@@ -57,7 +56,7 @@ describe('cypress-map', () => {
 
     it('shows the expected items - lodash', () => {
       cy.get('#prices li')
-        .should('have.length', 3) // must have it with ramda
+        .should('have.length', 3) // must have it with lodash
         .then(($els) => _.map($els, 'innerText')) // because then is not a query command (doesn't retry)
         .should('deep.eq', ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20'])
     })

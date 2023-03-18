@@ -32,6 +32,8 @@ const value = $('#my-element')[0].getAttribute('data-my-attribute');
 // attr is a jQuery method, gets the 0th element automatically
 const value = $('#my-element').attr('data-my-attribute');
 
+https://glebbahmutov.com/cypress-examples/recipes/element-attributes.html
+
 */
 
 it('cypress-map version', () => {
