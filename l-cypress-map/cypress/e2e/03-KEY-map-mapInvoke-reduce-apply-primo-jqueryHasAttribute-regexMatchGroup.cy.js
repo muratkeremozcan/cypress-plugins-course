@@ -23,7 +23,7 @@ it('counts the number of elements with data-selected attribute', () => {
   cy.get('#prices li[data-selected]').should('have.length', 2)
 })
 
-it.only('extracts dollars and cents from each list item', () => {
+it('extracts dollars and cents from each list item', () => {
   cy.visit('cypress/fixtures/prices-list.html')
   // get the price LIST elements
   // from each element find the "$x.yy" price strings
