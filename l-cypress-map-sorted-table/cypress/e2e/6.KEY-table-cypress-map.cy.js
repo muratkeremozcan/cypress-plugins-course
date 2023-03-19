@@ -12,7 +12,7 @@ beforeEach(() => {
   cy.visit('app/table.html')
 })
 
-it('confirms the headings', () => {
+it('confirms the headings: compare map array, lodash, ramda, cypress-map', () => {
   // can you confirm the table has the following headings?
   const headings = ['Name', 'Date (YYYY-MM-DD)', 'Age']
 
@@ -41,7 +41,7 @@ it('confirms the headings', () => {
   cy.get('thead > tr >').map('innerText').should('deep.eq', headings)
 })
 
-it('confirms the sorted age column', () => {
+it('confirms the sorted age column: cypress-map is necessary for retrying the chain', () => {
   // can you confirm the "Age" column is not sorted initially?
   // Tip: Use cy.table and other queries from cypress-map
 
@@ -94,14 +94,22 @@ it.skip('confirms the sorted age column (Gleb version)', () => {
 
 it('confirms the name and dates of the last two sorted rows', () => {
   // sort the table by date
-  //
+  cy.get('#sort-by-date').click()
+
   // confirm the last two rows have
   // the following name and dates
   const values = [
     ['Joe', '2001-01-24'],
     ['Anna', '2010-03-26'],
   ]
-  //
+
+  cy.get('table').table(0, 3, 2).should('deep.eq', values)
+
   // what if we don't know the number of rows?
   // Can you rewrite the above code to slice the table correctly?
+  cy.get('table')
+    .table()
+    .invoke('slice', -2) // gets the last two rows
+    .mapInvoke('slice', 0, 2) // for each array element, slice the first two columns
+    .should('deep.eq', values)
 })
