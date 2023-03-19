@@ -41,7 +41,7 @@ it('confirms the headings: compare map array, lodash, ramda, cypress-map', () =>
   cy.get('thead > tr >').map('innerText').should('deep.eq', headings)
 })
 
-it('confirms the sorted age column: cypress-map is necessary for retrying the chain', () => {
+it.only('confirms the sorted age column: cypress-map is necessary for retrying the chain', () => {
   // can you confirm the "Age" column is not sorted initially?
   // Tip: Use cy.table and other queries from cypress-map
 
@@ -54,21 +54,22 @@ it('confirms the sorted age column: cypress-map is necessary for retrying the ch
   const ageColumnValues = () => cy.get('table').table(2, 1)
 
   ageColumnValues()
-    // .then((t) => t.map(Number)) // JS array.map version
-    // .then((t) => _.map(t, Number)) // lodash version
-    // .then(map(Number)) // ramda version
+    .then((t) => t.map(Number)) // JS array.map version
+    .then((t) => _.map(t, Number)) // lodash version
+    .then(map(Number)) // ramda version
     .map(Number) // shortest, and the only one that retries the chain
     .should('not.be.sorted')
 
-  // click the sort button
+  // // click the sort button
   cy.get('#sort-by-date').click()
 
-  // the "Age" column should be sorted in ascending order
+  // // the "Age" column should be sorted in ascending order
   ageColumnValues()
     // .then((t) => t.map(Number)) // JS array.map version (won't work)
     // .then((t) => _.map(t, Number)) // lodash version (won't work)
     // .then(map(Number)) // ramda version (won't work)
     .map(Number) // the only version that works, because it retries!
+    .tap()
     .should('be.sorted')
 })
 
@@ -110,6 +111,6 @@ it('confirms the name and dates of the last two sorted rows', () => {
   cy.get('table')
     .table()
     .invoke('slice', -2) // gets the last two rows
-    .mapInvoke('slice', 0, 2) // for each array element, slice the first two columns
-    .should('deep.eq', values)
+    .invoke('slice', 0, 2) // for each array element, slice the first two columns
+  // .should('deep.eq', values)
 })

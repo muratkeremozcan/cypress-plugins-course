@@ -1,0 +1,30 @@
+{
+  "name": "cypress-map-example",
+  "version": "1.0.0",
+  "description": "Examples of cypress-map plugin",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "cypress run",
+    "cy:open": "cypress open --browser=chrome --e2e",
+    "cy:run": "cypress run --browser=chrome --e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahmutov/cypress-map-example.git"
+  },
+  "keywords": [
+    "cypress-example"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahmutov/cypress-map-example/issues"
+  },
+  "homepage": "https://github.com/bahmutov/cypress-map-example#readme",
+  "devDependencies": {
+    "cypress": "^12.8.1",
+    "cypress-map": "^1.14.0",
+    "prettier": "^2.8.4"
+  }
+}

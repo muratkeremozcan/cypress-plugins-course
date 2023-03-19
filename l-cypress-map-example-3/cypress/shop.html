@@ -1,0 +1,28 @@
+<head>
+  <style>
+    .money {
+      font-weight: bolder;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Online Shop</h1>
+  <ol id="items"></ol>
+  <script>
+    fetch('/items')
+      .then((r) => r.json())
+      .then((list) => {
+        // console.table(list)
+        list.sort((a, b) => a.name.localeCompare(b.name))
+        document.getElementById('items').innerHTML = list
+          .map(
+            (item) =>
+              `<li data-price="${item.price}">
+                  <span>${item.name}</span> <span class="money">${item.price}</span>
+                </li>`,
+          )
+          .join('\n')
+      })
+  </script>
+</body>
