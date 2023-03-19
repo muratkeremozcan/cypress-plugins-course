@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 import { construct, invoke, pipe, really } from 'cypress-should-really'
-const { _, $, R } = Cypress
+const { _, $ } = Cypress
+const R = require('ramda')
 
 describe('how to use cy.location', () => {
   it('To get window.location, use the cy.location() command', () => {
@@ -156,7 +157,7 @@ describe('FP', () => {
       _.fromPairs, //  { [key: string]: string }
     )
 
-    it('Ramda is a bit more verbose that should really, and the really syntax enables even further conciseness', () => {
+    it('Ramda is a bit more verbose than should really, and the really syntax enables even further conciseness', () => {
       cy.visit(
         'https://example.cypress.io/commands/location?search=value&id=1234',
       )
