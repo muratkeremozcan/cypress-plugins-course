@@ -20,18 +20,22 @@ it('confirms the headings', () => {
   cy.get('thead > tr >')
     .then(($tr) => $.makeArray($tr).map(($td) => $td.innerText))
     .should('deep.eq', headings)
+
   // lodash works with objects as it would with arrays, and has a property shorthand (built-in)
   cy.get('thead > tr >')
     .then(($tr) => _.map($tr, 'innerText'))
     .should('deep.eq', headings)
+
   // ramda is short, but doesn't auto-convert jQuery objects to arrays
   cy.get('thead > tr >')
     .then(($tr) => pluck('innerText', $.makeArray($tr)))
     .should('deep.eq', headings)
+
   // ramda with pipe is even shorter
   cy.get('thead > tr >')
     .then(pipe($.makeArray, pluck('innerText')))
     .should('deep.eq', headings)
+
   // none of the above retry because then is not a query command
   // cypress-map's map retries, because it is a query command
   cy.get('thead > tr >').map('innerText').should('deep.eq', headings)
