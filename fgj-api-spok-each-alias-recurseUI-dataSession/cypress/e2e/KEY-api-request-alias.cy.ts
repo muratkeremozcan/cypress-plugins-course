@@ -1,4 +1,4 @@
-import 'cypress-aliases/commands'
+import 'cypress-aliases'
 
 it('makes API requests using the previous value alias', () => {
   cy.request('POST', '/reset', { todos: [] })

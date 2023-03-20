@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "cypress-grep-example",
+  "version": "0.0.0-development",
+  "description": "Example application with grep tags inside the test names",
+  "scripts": {
+    "cy:open": "cypress open --e2e --browser=chrome",
+    "cy:run": "cypress run",
+    "dev": "start-test 8888 cy:open",
+    "start": "http-server -p 8888 -c-1",
+    "start:ci": "http-server -p 8888 -c-1 --silent",
+    "dev:run": "start-test start:ci 8888 cy:run",
+    "print-tests": "find-cypress-specs --names",
+    "update-badges": "npx -p dependency-version-badge update-badge cypress @bahmutov/cy-grep",
+    "stop-only": "stop-only --folder cypress/e2e"
+  },
+  "dependencies": {
+    "director": "1.2.8",
+    "http-server": "14.1.1",
+    "react": "18.2.0",
+    "todomvc-app-css": "2.4.2",
+    "todomvc-common": "cypress-io/todomvc-common#88b7c6359ad4a5097312d8b2a21dd539ce9f4446"
+  },
+  "devDependencies": {
+    "@bahmutov/cy-grep": "1.7.3",
+    "cypress": "12.8.1",
+    "cypress-expect": "3.1.0",
+    "find-cypress-specs": "1.31.3",
+    "prettier": "2.8.5",
+    "start-server-and-test": "2.0.0",
+    "stop-only": "3.3.1"
+  }
+}

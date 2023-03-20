@@ -1,0 +1,21 @@
+{
+  "name": "cypress-conduit-tags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cy:open": "cypress open --e2e --browser chrome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/ramda": "^0.28.23",
+    "cypress": "^12.8.1",
+    "cypress-data-session": "^2.3.1",
+    "cypress-map": "^1.14.0",
+    "prettier": "^2.8.5",
+    "ramda": "^0.28.0"
+  }
+}
