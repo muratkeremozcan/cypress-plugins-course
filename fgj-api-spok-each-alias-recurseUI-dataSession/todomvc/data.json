@@ -1,32 +1,3 @@
 {
-  "todos": [
-    {
-      "id": "303762",
-      "title": "helper"
-    },
-    {
-      "id": "483028",
-      "title": "lodash"
-    },
-    {
-      "id": "102466",
-      "title": "random"
-    },
-    {
-      "id": "292071",
-      "title": "several"
-    },
-    {
-      "id": "524738",
-      "title": "shuffled"
-    },
-    {
-      "id": "234745",
-      "title": "using"
-    },
-    {
-      "id": "407827",
-      "title": "words"
-    }
-  ]
+  "todos": []
 }

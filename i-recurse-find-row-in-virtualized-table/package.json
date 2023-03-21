@@ -1,0 +1,44 @@
+{
+  "name": "dnriby--run",
+  "version": "0.0.0",
+  "description": "Find row in virtualized table",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "11.10.5",
+    "@emotion/styled": "11.10.5",
+    "@mui/icons-material": "5.11.9",
+    "@mui/material": "5.11.9",
+    "@mui/x-data-grid": "5.17.24",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "4.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "dev": "start-test 3000 cy:open",
+    "cy:open": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^12.5.1",
+    "cypress-recurse": "^1.27.0",
+    "react-scripts": "latest",
+    "start-server-and-test": "^1.15.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
