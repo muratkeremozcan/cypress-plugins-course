@@ -1,4 +1,6 @@
 const { defineConfig } = require('cypress')
+const { stringify, parse } = require('json-cycle')
+
 // import the the plugin from another file instead
 // const registerPlugin = (on) =>
 //   on('task', {
@@ -30,6 +32,25 @@ module.exports = defineConfig({
   // commandDelay: 500, // global delay for all commands
   e2e: {
     setupNodeEvents(on, config) {
+      on('task', {
+        printObject(o) {
+          // parse the object we receive
+          // and try printing it to the console
+          console.log('received object', o)
+
+          // send an object with a circular reference
+          // back to the spec browser process
+          const report = {
+            entry: {
+              passed: true,
+            },
+          }
+          // set a circular reference
+          report.entry.report = report
+          // how would you safely send the report?
+          return stringify(report)
+        },
+      })
       return Object.assign(
         {},
         cyWatchReload(on, config),
